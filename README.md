@@ -1,3 +1,7 @@
+![Node-RED](https://img.shields.io/badge/Node--RED-%238F0000.svg?style=for-the-badge&logo=node-red&logoColor=white) 
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
+![InfluxDB](https://img.shields.io/badge/InfluxDB-22ADF6?style=for-the-badge&logo=InfluxDB&logoColor=white) ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
+
 # Project: Data Integration with InfluxDB and Node-Red
 
 This project demonstrates how to integrate data from a PLC (Programmable Logic Controller) with the InfluxDB database using Node-Red and Python. It includes two main files: a Python script for reading data from InfluxDB and a Node-Red flow for reading and writing data to the PLC.
