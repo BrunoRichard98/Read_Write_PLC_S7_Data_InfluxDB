@@ -53,8 +53,8 @@ To set up and execute the Node-Red flow:
 
 1. **Import the Flow**: Import the Read_Write_S7_Data_Node-Red_InfluxDB.json file into Node-Red.
 2. **Configure Nodes**:
-- S7 Endpoint: Set the IP address, port, rack, and slot of the Siemens S7 PLC.
-- InfluxDB Node: Configure the hostname, port, and bucket for InfluxDB.
+    - S7 Endpoint: Set the IP address, port, rack, and slot of the Siemens S7 PLC.
+    - InfluxDB Node: Configure the hostname, port, and bucket for InfluxDB.
 3. **Start the Flow**: Deploy and start the flow to read and write data.
 
 **Node-Red Flow Description**
