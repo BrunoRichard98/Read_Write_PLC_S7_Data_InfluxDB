@@ -38,35 +38,32 @@ This project demonstrates how to integrate data from a PLC (Programmable Logic C
 ## Configuration and Execution
 
 ### Python
-1. Ensure you have Conda installed.
-2. Install the dependencies:
+To set up and execute the Python script:
+1. **Install Conda**: Ensure Conda is installed on your system.
+2. **Install Dependencies**: Run the following commands to install required libraries:
    ```bash
-   pip install influxdb_client 
+   pip install influxdb_client
    pip install pandas
-   ```
-Workspace
-(rerun without)
-Collecting workspace information
 
-Run the script in Jupyter Notebook to query data from InfluxDB.
-Node-Red
-Import the flow Read_Write_S7_Data_Node-Red_InfluxDB.json into Node-Red.
-Configure the nodes:
-s7 endpoint: Set the IP address, port, rack, and slot of the PLC.
-influxdb: Set the hostname, port, and bucket of InfluxDB.
-Start the flow to read and write data.
-Node-Red Flow
-Description
-The flow performs the following steps:
+3. Run the Script: Open the Read_Data_InfluxDB_Python.ipynb file in Jupyter Notebook and execute the cells to query data from InfluxDB.
 
-Read data from the PLC: Using the s7 in node.
-Format the payload: Using the function node.
-Send to InfluxDB: Using the influxdb out node.
-Notes
-Ensure that InfluxDB is configured and accessible at http://localhost:8086.
-Replace authentication and configuration values as needed.
-License
-This project is distributed under the MIT license. See the LICENSE file for more details.
 
-Contact
-For questions or support, contact us at: support@example.com. ```
+### Node-Red
+To set up and execute the Node-Red flow:
+
+1. **Import the Flow**: Import the Read_Write_S7_Data_Node-Red_InfluxDB.json file into Node-Red.
+2. **Configure Nodes**:
+- S7 Endpoint: Set the IP address, port, rack, and slot of the Siemens S7 PLC.
+- InfluxDB Node: Configure the hostname, port, and bucket for InfluxDB.
+3. **Start the Flow**: Deploy and start the flow to read and write data.
+
+**Node-Red Flow Description**
+The Node-Red flow performs the following steps:
+
+1. Read Data from PLC: Using the s7 in node to fetch data from the Siemens S7 PLC.
+2. Format Payload: Using the function node to format the payload and timestamp.
+3. Send Data to InfluxDB: Using the influxdb out node to store the data in InfluxDB.
+
+**Notes**
+Ensure InfluxDB is properly configured and accessible at http://localhost:8086.
+Update authentication and configuration values as needed for your environment.
