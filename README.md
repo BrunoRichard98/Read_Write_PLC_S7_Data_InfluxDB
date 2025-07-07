@@ -37,8 +37,9 @@ This project demonstrates how to integrate data from a PLC (Programmable Logic C
 1. Ensure you have Conda installed.
 2. Install the dependencies:
    ```bash
-   pip install influxdb_client pandas
-
+   pip install influxdb_client 
+   pip install pandas
+   ```
 Workspace
 (rerun without)
 Collecting workspace information
