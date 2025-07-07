@@ -1,0 +1,121 @@
+[
+    {
+        "id": "tab1",
+        "type": "tab",
+        "label": "Generic_PLC_Flow",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "func1",
+        "type": "function",
+        "z": "tab1",
+        "name": "Format Payload",
+        "func": "// Function to format the timestamp\nfunction formatTimestamp() {\n    const now = new Date();\n    const year = now.getFullYear();\n    const month = String(now.getMonth() + 1).padStart(2, '0');\n    const day = String(now.getDate()).padStart(2, '0');\n    const hours = String(now.getHours()).padStart(2, '0');\n    const minutes = String(now.getMinutes()).padStart(2, '0');\n    const seconds = String(now.getSeconds()).padStart(2, '0');\n    const milliseconds = String(now.getMilliseconds()).padStart(3, '0');\n    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;\n}\n\nfunction convertArraysToStrings(payload) {\n    const keysToConvert = [\"Sensor_A\", \"Sensor_B\", \"Flag_X\", \"Buffer_Status\", \"Item_Detect_A\", \"Item_Detect_B\"];\n    keysToConvert.forEach(key => {\n        if (Array.isArray(payload[key])) {\n            payload[key] = JSON.stringify(payload[key]);\n        }\n    });\n    return payload;\n}\n\nmsg.measurement = \"Generic_Measurement\";\nmsg.payload = convertArraysToStrings(msg.payload);\n\nmsg.payload = {\n    \"Counter_A\": msg.payload.Counter_A,\n    \"Counter_B\": msg.payload.Counter_B,\n    \"Status_1\": msg.payload.Status_1,\n    \"Status_2\": msg.payload.Status_2,\n    \"Flag_1\": msg.payload.Flag_1,\n    \"Flag_2\": msg.payload.Flag_2,\n    \"Step_ID\": msg.payload.Step_ID,\n    \"Error_Code\": msg.payload.Error_Code,\n    \"Recipe\": msg.payload.Recipe,\n    \"Always_True\": msg.payload.Always_True,\n    \"Emergency_Stop\": msg.payload.Emergency_Stop,\n    \"Limit_Switch_Top\": msg.payload.Limit_Switch_Top,\n    \"Limit_Switch_Bottom\": msg.payload.Limit_Switch_Bottom,\n    \"Axis_X_Ref\": msg.payload.Axis_X_Ref,\n    \"Axis_Y_Ref\": msg.payload.Axis_Y_Ref,\n    \"Valve_In\": msg.payload.Valve_In,\n    \"Valve_Out\": msg.payload.Valve_Out,\n    \"Sensor_A\": msg.payload.Sensor_A,\n    \"Sensor_B\": msg.payload.Sensor_B,\n    \"Motor_Status\": msg.payload.Motor_Status,\n    \"Speed_X\": msg.payload.Speed_X,\n    \"Speed_Y\": msg.payload.Speed_Y,\n    \"Speed_Z\": msg.payload.Speed_Z,\n    \"formatted_timestamp\": formatTimestamp()\n};\n\nreturn msg;",
+        "outputs": 1,
+        "x": 370,
+        "y": 20,
+        "wires": [["debug1"]]
+    },
+    {
+        "id": "debug1",
+        "type": "debug",
+        "z": "tab1",
+        "name": "Debug Output",
+        "active": true,
+        "tosidebar": true,
+        "x": 620,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "influx1",
+        "type": "influxdb out",
+        "z": "tab1",
+        "influxdb": "influx_config1",
+        "name": "Send to InfluxDB",
+        "measurement": "Generic_Measurement",
+        "database": "generic_database",
+        "org": "GENERIC_ORG",
+        "bucket": "Generic_Bucket",
+        "precisionV18FluxV20": "ms",
+        "x": 630,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "s7in1",
+        "type": "s7 in",
+        "z": "tab1",
+        "endpoint": "s7endpoint1",
+        "mode": "all",
+        "variable": "Item_Detect_B",
+        "x": 130,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "influx_config1",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "generic_database",
+        "name": "Generic_Influx_Config",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "s7endpoint1",
+        "type": "s7 endpoint",
+        "transport": "iso-on-tcp",
+        "address": "192.168.0.100",
+        "port": "102",
+        "rack": "0",
+        "slot": "1",
+        "localtsaphi": "01",
+        "localtsaplo": "00",
+        "remotetsaphi": "01",
+        "remotetsaplo": "00",
+        "connmode": "rack-slot",
+        "cycletime": "1000",
+        "timeout": "20000",
+        "name": "Generic_PLC",
+        "vartable": [
+            {
+                "addr": "M0.0",
+                "name": "Flag_1"
+            },
+            {
+                "addr": "MW10",
+                "name": "Counter_A"
+            },
+            {
+                "addr": "DB1,WORD2",
+                "name": "Counter_B"
+            },
+            {
+                "addr": "I0.0",
+                "name": "Emergency_Stop"
+            },
+            {
+                "addr": "Q0.0",
+                "name": "Motor_Status"
+            },
+            {
+                "addr": "MD10",
+                "name": "Speed_X"
+            },
+            {
+                "addr": "MD14",
+                "name": "Speed_Y"
+            },
+            {
+                "addr": "MD18",
+                "name": "Speed_Z"
+            }
+        ]
+    }
+]
