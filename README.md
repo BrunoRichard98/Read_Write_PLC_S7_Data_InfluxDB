@@ -4,7 +4,7 @@
 
 # Project: Data Integration with InfluxDB and Node-Red
 
-This project demonstrates how to integrate data from a PLC (Programmable Logic Controller) with the InfluxDB database using Node-Red and Python. It includes two main files: a Python script for reading data from InfluxDB and a Node-Red flow for reading and writing data to the PLC.
+This project demonstrates how to integrate data from a PLC (Programmable Logic Controller) with the InfluxDB database using Node-Red and Python. It includes two main files: a Python script for reading data from InfluxDB and a Node-Red flow for reading PLC data and writing them to InfluxDB.
 
 ---
 
